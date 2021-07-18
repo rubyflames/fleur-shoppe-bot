@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/rubyflames/fleur-shoppe-bot/issues"
   },
-  "homepage": "https://github.com/rubyflames/fleur-shoppe-bot#readme"
+  "homepage": "https://github.com/rubyflames/fleur-shoppe-bot#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
