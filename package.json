@@ -2,7 +2,7 @@
   "name": "fleur-shoppe-bot",
   "version": "1.0.0",
   "description": "This is a florist shop chatbot. It is built using Dialogflow, NodeJS, Firebase and deployed on Heroku.<br> This is Rachel Lee's CA2 submission for the AI Human Interface module of Singapore Polytechnic's Specialist Diploma in Data Science (Artificial Intelligence specialisation) course.",
-  "main": "index.js",
+  "start": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/rubyflames/fleur-shoppe-bot#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dayjs": "^1.10.6",
+    "express": "^4.17.1",
+    "heroku": "^7.56.1"
   }
 }
