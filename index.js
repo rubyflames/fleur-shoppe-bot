@@ -2,7 +2,7 @@ const express = require('express')
 
 const admin = require('firebase-admin')
 
-// var serviceAccount = require("")
+var serviceAccount = require("./fleur-shoppe-jvqg-firebase-adminsdk-7cs5b-eec47d5821.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -22,7 +22,7 @@ ref.on('value', (snapshot) => {
 const app = express()
 app.use(express.json());
 
-const port = process.env.PORT || 3000 // This is important for Heroku to bind their port to application
+const port = process.env.PORT || 4000 // This is important for Heroku to bind their port to application
 
 function handleRoot(req, res) {
     res.send('Hello back!')
@@ -72,6 +72,22 @@ function handleDialog(req, res) {
   
       const refAppointment = db.ref("appointments")
       const newAppointmentRef = refAppointment.push()
+
+      /*
+      Have fixed slots e.g. 9am, 10am, etc.
+      Create a dictionary. Write it out
+      JSON object:
+      {
+        appointment_datetime: appointment_datetime, //index can be a string
+        name: name,
+        phone_number: phone_number,
+        venue: venue
+      
+      }
+      
+      Use time as index
+        */
+      // as a list
       newAppointmentRef.set({
         name: name,
         venue: venue,
