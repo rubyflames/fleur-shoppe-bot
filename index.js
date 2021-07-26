@@ -68,18 +68,18 @@ function handleDialog(req, res) {
       const parameters = body.queryResult.parameters;
       const appointment_datetime = parameters["appointment-datetime"].date_time;    
       const name = parameters["name"];
-      const clinic = parameters["clinic"];
+      const venue = parameters["venue"];
   
       const refAppointment = db.ref("appointments")
       const newAppointmentRef = refAppointment.push()
       newAppointmentRef.set({
         name: name,
-        clinic: clinic,
+        venue: venue,
         appointment_datetime: appointment_datetime
       })
       res.status(200).send()    
     } else
-    if (intent === "search-clinics") {
+    if (intent === "order-bouquet") {
       const parameters = body.queryResult.parameters;
       const town = parameters.town;
   
