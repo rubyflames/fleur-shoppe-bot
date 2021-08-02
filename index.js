@@ -1,6 +1,10 @@
 const express = require('express')
+require('dotenv').config()
+// ${process.env.KEY}
 
 const admin = require('firebase-admin')
+
+import orderBouquet from "./intents/order-bouquet.js"
 
 var serviceAccount = require("./fleur-shoppe-jvqg-firebase-adminsdk-7cs5b-eec47d5821.json");
 
@@ -95,8 +99,25 @@ function handleDialog(req, res) {
       })
       res.status(200).send()    
     } else
-    if (intent === "order-bouquet") {
+    if (intent === "bouquet-order") {
       const parameters = body.queryResult.parameters;
+
+      const quantity = parameters["order-quantity"]
+      const order_datetime = parameters["date-time"].date_time;    
+      const custom_order = parameters["custom-order"];
+      // const name = parameters["name"];
+      // const venue = parameters["venue"];
+      
+  
+      const refOrder = db.ref("orders")
+      const newOrderRef = refOrder.push()
+
+      newOrderRef.set({
+        quantity: quantity,
+        order_datetime: order_datetime,
+        custom_order: custom_order
+      })
+      /*
       const town = parameters.town;
   
       const refClinics = db.ref("clinics")
@@ -144,6 +165,7 @@ function handleDialog(req, res) {
         
        
       })
+      */
     }
   }
   
