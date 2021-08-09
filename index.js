@@ -4,7 +4,7 @@ require('dotenv').config()
 
 const admin = require('firebase-admin')
 
-import orderBouquet from "./intents/order-bouquet.js"
+// import orderBouquet from "./intents/order-bouquet.js"
 
 var serviceAccount= {
   "type": process.env.account_type,
@@ -79,6 +79,77 @@ function handleDialog(req, res) {
     const body = req.body;
     const intent = body.queryResult.intent.displayName;
   
+    /*
+    Thank you for placing your order. We will send your order of #bouquet-order.order-quantity bouquet(s) to $delivery-address on #bouquet-order.date-time.original . Please note that cash payment of SGD70 per bouquet should be made upon delivery. What else would you like to do?
+    */
+    if (intent === "bouquet-order-collection") {
+      const parameters = body.queryResult.parameters;
+      const order_datetime = parameters["date-time"].original;    
+      // const name = parameters["name"];
+      // const venue = parameters["venue"];
+  
+      const refAppointment = db.ref("appointments")
+      const newAppointmentRef = refAppointment.push()
+      const store = parameters.store;
+  
+      const refOrder = db.ref("orders")
+      refOrder.orderByChild('order').equalTo(order).on('value', function(snapshot) {
+        const clinics = snapshot.val()
+        
+          let message = "Thank you for placing your order! Please pick up from our pop-up store at The Wired Monkey cafe @ 5 Dunlop St, #01-00, Singapore 209335 (view on Google maps here: https://g.page/TheWiredMonkey?share). We will notify you when your order is ready. Also, please make payment of SGD70 per bouquet upon pick-up on " + order_datetime + ". What else would you want to do?"
+          // const keys = Object.keys(clinics)
+        
+          // let optionButtons = ['Book an Appointment', 'Purchase a Bouquet', 'End Chat']
+        
+          res.send({
+              "fulfillmentMessages": [
+                {
+                  "text": {
+                    "text": [
+                      message
+                    ]
+                  }
+                },
+                {
+                  "card": {
+                    "title": "Our Pop-up Store",
+                    "subtitle": "The Wired Monkey @ 5 Dunlop St, #01-00, Singapore 209335 (https://g.page/TheWiredMonkey?share)",
+                    "imageUri": "https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"//,
+                    // "buttons": optionButtons
+                  },
+                  "reply_markup": {
+                    "inline_keyboard": [
+                      [
+                        {
+                          "text": "Book an Appointment",
+                          "callback_data": "Book an Appointment"
+                        }
+                      ],
+                      [
+                        {
+                          "text": "Purchase a Bouquet",
+                          "callback_data": "Purchase a Bouquet"
+                        }
+                      ],
+                      [
+                        {
+                          "text": "End Chat",
+                          "callback_data": "End Chat"
+                        }
+                      ]
+                    ]
+                  },
+                  "platform": "TELEGRAM"
+                },
+              ]
+            })
+        
+        
+       
+      })
+    }
+      res.status(200).send()    
+    } else
     if (intent === "make-appointment") {
       const parameters = body.queryResult.parameters;
       const appointment_datetime = parameters["appointment-datetime"].date_time;    
@@ -107,6 +178,7 @@ function handleDialog(req, res) {
         name: name,
         venue: venue,
         appointment_datetime: appointment_datetime
+        // email: email
       })
       res.status(200).send()    
     } else
