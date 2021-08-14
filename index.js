@@ -83,18 +83,17 @@ function handleDialog(req, res) {
 
   if (intent === "operation-hours") {
     const parameters = body.queryResult.parameters;
-    // const order_datetime = parameters["date-time"].original;
-    // const name = parameters["name"];
-    // const venue = parameters["venue"];
-
-    // const refOrder = db.ref("orders")
-    // const newOrderRef = refAppointment.push()
-    // const store = parameters.store;
-
-
 
     let message = "Our pop-up store is open on Mondays to Saturdays, 10am to 8pm, except on Public Holidays. Visit us at The Wired Monkey cafe @ 5 Dunlop St, #01-00, Singapore 209335 (view on Google maps here: https://g.page/TheWiredMonkey?share)! You can still place an order or book an appointment with us here. What would you like to do?"
-    // let optionButtons = ['Find our Store', 'Directions']   
+    // let optionButtons = ['Find our Store', 'Directions']  
+    let optionButtons = [{
+      "buttonname": 'Find our Store',
+      "link": 'https://g.page/TheWiredMonkey?share'
+      },
+      {
+        "buttonname": 'Directions',
+        "link": 'https://g.page/TheWiredMonkey?share'
+      }] 
 
     res.send({
       "fulfillmentMessages": [
@@ -110,10 +109,7 @@ function handleDialog(req, res) {
             "title": "Our Pop-up Store",
             "subtitle": "The Wired Monkey @ 5 Dunlop St, #01-00, Singapore 209335 (https://g.page/TheWiredMonkey?share)",
             "imageUri": "https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
-            "buttons": [{
-              "buttonname": 'View on Google Maps',
-              "link": 'https://g.page/TheWiredMonkey?share'
-            }]
+            "buttons": optionButtons
             
           },
           "reply_markup": {
