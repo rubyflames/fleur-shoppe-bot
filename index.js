@@ -86,14 +86,12 @@ function handleDialog(req, res) {
 
     let message = "Our pop-up store is open on Mondays to Saturdays, 10am to 8pm, except on Public Holidays. Visit us at The Wired Monkey cafe @ 5 Dunlop St, #01-00, Singapore 209335 (view on Google maps here: https://g.page/TheWiredMonkey?share)! You can still place an order or book an appointment with us here. What would you like to do?"
     // let optionButtons = ['Find our Store', 'Directions']  
-    let optionButtons = [{
-      "buttonname": 'Find our Store',
-      "link": 'https://g.page/TheWiredMonkey?share'
-      },
+    let optionButtons = [
       {
-        "buttonname": 'Directions',
-        "link": 'https://g.page/TheWiredMonkey?share'
-      }] 
+      "text": 'Find our Store',
+      "link": 'https://g.page/TheWiredMonkey?share'
+      }
+    ] 
 
     res.send({
       "fulfillmentMessages": [
@@ -105,6 +103,13 @@ function handleDialog(req, res) {
           }
         },
         {
+          "telegram": {
+
+            "text": {
+              "text": [
+                message
+            ]
+          },
           "card": {
             "title": "Our Pop-up Store",
             "subtitle": "The Wired Monkey @ 5 Dunlop St, #01-00, Singapore 209335 (https://g.page/TheWiredMonkey?share)",
@@ -136,7 +141,9 @@ function handleDialog(req, res) {
           },
           "platform": "TELEGRAM"
         }
+      }
       ]
+    
     })
 
   }
