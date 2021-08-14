@@ -102,22 +102,28 @@ function handleDialog(req, res) {
             ]
           }
         },
-        {"card": {
+        {
+          "card": {
           "title": "Our Pop-up Store",
           "subtitle": "The Wired Monkey @ 5 Dunlop St, #01-00, Singapore 209335 (https://g.page/TheWiredMonkey?share)",
           "imageUri": "https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
           "buttons": optionButtons
           
-        }},
-        {
-          "telegram": {
-           /*,
-          "text": {
-            "text": [
-              message
-            ]
-          },
-          */
+          }
+        }
+      ]
+    })
+
+  }
+  res.status(200).send()
+}
+
+app.post('/appointment', handleAppointment)
+app.post('/dialog', handleDialog)
+
+/*
+{
+      "telegram": {
           "reply_markup": {
             "inline_keyboard": [
               [
@@ -151,12 +157,5 @@ function handleDialog(req, res) {
       }
       ]
     
-    })
-
-  }
-  res.status(200).send()
-}
-
-app.post('/appointment', handleAppointment)
-app.post('/dialog', handleDialog)
-
+    }
+    */
