@@ -86,12 +86,14 @@ function handleDialog(req, res) {
 
     let message = "Our pop-up store is open on Mondays to Saturdays, 10am to 8pm, except on Public Holidays. Visit us at The Wired Monkey cafe @ 5 Dunlop St, #01-00, Singapore 209335 (view on Google maps here: https://g.page/TheWiredMonkey?share)! You can still place an order or book an appointment with us here. What would you like to do?"
     // let optionButtons = ['Find our Store', 'Directions']  
+    /*
     let optionButtons = [
       {
       "text": 'Find our Store',
       "link": 'https://g.page/TheWiredMonkey?share'
       }
     ] 
+    */
 
     res.send({
       "fulfillmentMessages": [
@@ -106,11 +108,39 @@ function handleDialog(req, res) {
           "card": {
           "title": "Our Pop-up Store",
           "subtitle": "The Wired Monkey @ 5 Dunlop St, #01-00, Singapore 209335 (https://g.page/TheWiredMonkey?share)",
-          "imageUri": "https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80",
-          "buttons": optionButtons
+          "imageUri": "https://images.unsplash.com/photo-1567696153798-9111f9cd3d0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+          // "buttons": optionButtons
           
           }
-        }
+        },
+        "reply_markup": {
+          "inline_keyboard": [
+            [
+              {
+                "text": "FAQ",
+                "callback_data": "FAQ"
+              }
+            ],
+            [
+              {
+                "text": "Book an Appointment",
+                "callback_data": "Book an Appointment"
+              }
+            ],
+            [
+              {
+                "text": "Purchase a Bouquet",
+                "callback_data": "Purchase a Bouquet"
+              }
+            ],
+            [
+              {
+                "text": "End Chat",
+                "callback_data": "End Chat"
+              }
+            ]
+          ]
+      }
       ]
     })
 
