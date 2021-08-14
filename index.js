@@ -138,8 +138,8 @@ function handleDialog(req, res) {
                 }
               ]
             ]
-          },
-          "platform": "TELEGRAM"
+          }//,
+          // "platform": "TELEGRAM"
         }
       }
       ]
