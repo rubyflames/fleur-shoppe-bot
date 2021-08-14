@@ -110,7 +110,7 @@ function handleDialog(req, res) {
           
         }},
         {
-          "telegram": {
+          // "telegram": {
            /*,
           "text": {
             "text": [
@@ -139,9 +139,9 @@ function handleDialog(req, res) {
                 }
               ]
             ]
-          }//,
-          // "platform": "TELEGRAM"
-        }
+          },
+          "platform": "TELEGRAM"
+        // }
       }
       ]
     
