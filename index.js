@@ -110,7 +110,7 @@ function handleDialog(req, res) {
           
         }},
         {
-          // "telegram": {
+          "telegram": {
            /*,
           "text": {
             "text": [
@@ -120,6 +120,12 @@ function handleDialog(req, res) {
           */
           "reply_markup": {
             "inline_keyboard": [
+              [
+                {
+                  "text": "FAQ",
+                  "callback_data": "FAQ"
+                }
+              ],
               [
                 {
                   "text": "Book an Appointment",
@@ -139,9 +145,9 @@ function handleDialog(req, res) {
                 }
               ]
             ]
-          },
-          "platform": "TELEGRAM"
-        // }
+          // },
+          // "platform": "TELEGRAM"
+        }
       }
       ]
     
